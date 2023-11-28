@@ -1,0 +1,24 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Build and Deploy
+        run: |
+          mkdir public
+          cp assignment/homepage.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACCESS_TOKEN }}
+          publish_branch: gh-pages
